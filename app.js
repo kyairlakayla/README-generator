@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const generateReadme = require('./src/readme-template');
 
 const promptUser = () => {
     return inquirer.prompt([
@@ -123,3 +124,6 @@ const promptUser = () => {
     ]);
 };
 promptUser().then(answers => console.log(answers));
+
+// function to contain user answers to be called in README template
+const answers = promptUser();
