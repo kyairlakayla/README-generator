@@ -37,3 +37,4 @@ const generateReadme = answers => {
     
     `
 }
+module.exports = generateReadme;

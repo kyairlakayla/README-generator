@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const generateReadme = require('./src/readme-template');
+const writeFileAsync = require('./src/generate-page');
 
 const promptUser = () => {
     return inquirer.prompt([
@@ -121,9 +122,21 @@ const promptUser = () => {
                 }
             }
         }
-    ]);
+    ]).then((answers) => {console.log(answers)});
 };
-promptUser().then(answers => console.log(answers));
+// promptUser();
+// promptUser().then(answers => console.log(answers));
+
+const answers = promptUser();
 
 // function to contain user answers to be called in README template
-const answers = promptUser();
+async function init() {
+    try {
+        const answers = await promptUser();
+        const generateContent = generateReadme(answers);
+        await writeFileAsync('./index.html', generateContent);
+        console.log('README created!')
+    } catch(err) {
+        console.log(err);
+    }
+};
