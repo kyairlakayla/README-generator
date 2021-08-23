@@ -1,4 +1,5 @@
 const generateReadme = answers => {
+    console.log(answers);
     return `
         <h1 align="center">${answers.title}
 

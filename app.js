@@ -1,6 +1,8 @@
+const fs = require('fs');
 const inquirer = require('inquirer');
-const generateReadme = require('./src/readme-template');
-const writeFileAsync = require('./src/generate-page');
+const generateReadme = require('./src/readme-template.js');
+const util = require('util');
+const writeFileAsync = util.promisify(fs.writeFile);
 
 const promptUser = () => {
     return inquirer.prompt([
@@ -122,21 +124,43 @@ const promptUser = () => {
                 }
             }
         }
-    ]).then((answers) => {console.log(answers)});
+    ]).then((answers) => {const generateContent = generateReadme(answers);});
 };
+
+const writeFile = generateReadme => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile('./index.html', generateReadme, err => {
+            if (err) {
+                console.log(err);
+                return err;
+                
+    
+            }
+            resolve({
+                ok: true,
+                message: 'File created!'
+            });
+
+        });
+    });
+};
+
+
 // promptUser();
 // promptUser().then(answers => console.log(answers));
 
-const answers = promptUser();
+// const answers = promptUser();
 
-// function to contain user answers to be called in README template
+
 async function init() {
     try {
         const answers = await promptUser();
-        const generateContent = generateReadme(answers);
-        await writeFileAsync('./index.html', generateContent);
+//        const generateContent = generateReadme(answers);
+//        await writeFileAsync('./index.html', generateContent);
         console.log('README created!')
     } catch(err) {
         console.log(err);
     }
 };
+
+init();
