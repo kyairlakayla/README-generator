@@ -13,3 +13,5 @@ const writeFile = generateReadme => {
         });
     });
 };
+
+module.exports = writeFile; 

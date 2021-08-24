@@ -1,8 +1,9 @@
-const fs = require('fs');
+// const fs = require('fs');
 const inquirer = require('inquirer');
 const generateReadme = require('./src/readme-template.js');
-const util = require('util');
-const writeFileAsync = util.promisify(fs.writeFile);
+const writeFile = require('./src/generate-page');
+// const util = require('util');
+// const writeFileAsync = util.promisify(fs.writeFile);
 
 const promptUser = () => {
     return inquirer.prompt([
@@ -124,26 +125,32 @@ const promptUser = () => {
                 }
             }
         }
-    ]).then((answers) => {const generateContent = generateReadme(answers);});
+    ])
+//    .then((answers) => {const generateContent = generateReadme(answers)}
+    .then((answers) =>
+    generateReadme(answers))
+    .then(template => {
+        writeFile(template)
+    })
 };
 
-const writeFile = generateReadme => {
-    return new Promise((resolve, reject) => {
-        fs.writeFile('./index.html', generateReadme, err => {
-            if (err) {
-                console.log(err);
-                return err;
-                
-    
-            }
-            resolve({
-                ok: true,
-                message: 'File created!'
-            });
-
-        });
-    });
-};
+// const writeFile = generateReadme => {
+//    return new Promise((resolve, reject) => {
+//        fs.writeFile('./index.html', generateReadme, err => {
+//            if (err) {
+//                console.log(err);
+//                return err;
+//                
+//    
+//            }
+//            resolve({
+//                ok: true,
+//                message: 'File created!'
+//            });
+//
+//        });
+//   });
+//};
 
 
 // promptUser();
