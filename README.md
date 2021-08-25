@@ -29,5 +29,5 @@ None.
 
 ## Questions 
 
-Find me on GitHub: 
+Find me on GitHub: https://github.com/kyairlakayla
 Email me with questions: kyairlakayla.davis@gmail.com
