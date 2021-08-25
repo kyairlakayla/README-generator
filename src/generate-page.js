@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const writeFile = generateReadme => {
     return new Promise((resolve, reject) => {
-        fs.writeFile('./index.html', generateReadme, err => {
+        fs.writeFile('./README-file.md', generateReadme, err => {
             if (err) {
                 return;
             }

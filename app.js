@@ -126,7 +126,7 @@ const promptUser = () => {
             }
         }
     ])
-//    .then((answers) => {const generateContent = generateReadme(answers)}
+
     .then((answers) =>
     generateReadme(answers))
     .then(template => {
@@ -134,36 +134,10 @@ const promptUser = () => {
     })
 };
 
-// const writeFile = generateReadme => {
-//    return new Promise((resolve, reject) => {
-//        fs.writeFile('./index.html', generateReadme, err => {
-//            if (err) {
-//                console.log(err);
-//                return err;
-//                
-//    
-//            }
-//            resolve({
-//                ok: true,
-//                message: 'File created!'
-//            });
-//
-//        });
-//   });
-//};
-
-
-// promptUser();
-// promptUser().then(answers => console.log(answers));
-
-// const answers = promptUser();
-
 
 async function init() {
     try {
         const answers = await promptUser();
-//        const generateContent = generateReadme(answers);
-//        await writeFileAsync('./index.html', generateContent);
         console.log('README created!')
     } catch(err) {
         console.log(err);
